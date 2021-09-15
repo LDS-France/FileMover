@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Properties;
 
 import javax.swing.SwingUtilities;
@@ -26,7 +27,7 @@ public class AppController {
 	@FXML private TextField textfield_lifetime;
 	@FXML private CheckBox checkbox_delete;
 
-	String fileLifetime;
+	int fileLifetime;
 	String fileExt;
 	int comboboxIndex;
 	String folder_src;
@@ -48,7 +49,7 @@ public class AppController {
 		}
 
 		fileExt = (String) prop.getProperty("fileExt", null);
-		fileLifetime = (String) prop.getProperty("fileLifetime", null);
+		fileLifetime = Integer.parseInt(prop.getProperty("fileLifetime", "0"));
 		folder_src = (String) prop.getProperty("folder_src", null);
 		folder_dest = (String) prop.getProperty("folder_dest", null);
 		comboboxIndex = Integer.parseInt(prop.getProperty("comboboxIndex", "2"));
@@ -56,6 +57,7 @@ public class AppController {
 		if(folder_dest != null && folder_dest.equals("delete")) {
 			button_dest.setText("Suppression");
 			button_dest.setDisable(true);
+			checkbox_delete.setSelected(true);
 		}
 
 		Runnable task = new Runnable() {
@@ -63,10 +65,13 @@ public class AppController {
 			public void run() {
 				while(true) {
 					if(folder_src != null && folder_dest != null && fileExt != null) {
+						
 						File src = new File(folder_src);
 						File dest = new File(folder_dest);
 
-						if(src.isDirectory() && dest.isDirectory()) {
+						if(src.isDirectory()) {
+							
+							boolean usingLifetime = fileLifetime > 0;
 							
 							int fileMovedAmount = 0;
 							
@@ -74,46 +79,60 @@ public class AppController {
 							for(int idx = 0; idx < files.length; idx++) {
 
 								File file = files[idx];
+								
 								if(!file.getName().endsWith(fileExt))
 									continue;
 
 								try {
+									
 									if(checkbox_delete.isSelected()) {
+										
+										if(usingLifetime && (System.currentTimeMillis()-file.lastModified())/1000 <= fileLifetime)
+											continue;
+										
+										fileMovedAmount++;
+										System.out.println(file.toPath()+" removed");
 										file.delete();
 										continue;
 									}
 									
+									if(!dest.isDirectory())
+										return;
+									
 									File destFile = new File(dest.getAbsoluteFile()+File.separator+file.getName());
 									if(destFile.exists())
+										continue;
+									
+									if(usingLifetime && (System.currentTimeMillis()-file.lastModified())/1000 <= fileLifetime)
 										continue;
 									
 									Files.move(file.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 									fileMovedAmount++;
 									System.out.println(file.toPath()+" copied to "+dest.toPath());
 								} catch (IOException e) {
-									System.out.println("ERREUR");
+									System.out.println("error");
 									e.printStackTrace();
 								}
 							}
 							
-							if(fileMovedAmount>0) {
-								String s = ((fileMovedAmount>1)?"s":"");
-								String notifMessage = fileMovedAmount+" fichier"+s+" déplacé"+s+".";
-								SwingUtilities.invokeLater(() -> Main.trayIcon.displayMessage("FileMover", notifMessage, java.awt.TrayIcon.MessageType.INFO));
-							}
+							///if(fileMovedAmount>0) {
+								//String s = ((fileMovedAmount>1)?"s":"");
+								//String notifMessage = fileMovedAmount+" fichier"+s+" déplacé"+s+".";
+								//SwingUtilities.invokeLater(() -> Main.trayIcon.displayMessage("FileMover", notifMessage, java.awt.TrayIcon.MessageType.INFO));
+							//}
 
 						}
 					}
 					
-					long timeToSleep = 0;
-					if(comboboxIndex == 0)
+					long timeToSleep = 1000; // 0
+					/*if(comboboxIndex == 0)
 						timeToSleep = 1000 * 60 * 30; // 30 mins
 					else if(comboboxIndex == 1)
 						timeToSleep = 1000 * 60 * 60; // 1 h
 					else if(comboboxIndex == 2)
 						timeToSleep = 1000 * 60 * 120; // 2 h
 					else if(comboboxIndex == 3)
-						timeToSleep = 1000 * 60 * 240; // 4 h
+						timeToSleep = 1000 * 60 * 240; // 4 h*/
 						
 					
 					try {
@@ -136,8 +155,21 @@ public class AppController {
 			save();
 		});
 		
-		textfield_lifetime.setText(fileLifetime==null?"":fileLifetime);
-
+		textfield_lifetime.setText(fileLifetime==0?"":fileLifetime+"");
+		textfield_lifetime.textProperty().addListener((obs, old, news) -> {
+			try {
+				fileLifetime = Integer.parseInt(news);
+			} catch(NumberFormatException e) {
+				textfield_lifetime.textProperty().setValue(old);
+				return;
+			}
+			
+			System.out.println("new fileLifetime : "+fileLifetime);
+			prop.setProperty("fileLifetime", fileLifetime+"");
+			save();
+		});
+		
+		
 		textfield_extension.setText(fileExt==null?"":fileExt);
 		textfield_extension.textProperty().addListener((obs, old, news) -> {
 			fileExt = news;
@@ -180,12 +212,15 @@ public class AppController {
 			if(newv) {
 				folder_dest = "delete";
 				prop.setProperty("folder_dest", folder_dest);
-				button_dest.setText("Suppression");
+				button_dest.setText("delete");
 				button_dest.setDisable(true);
 				save();
 			} else {
-				button_dest.setText("Dossier destination non défini");
+				button_dest.setText("Undefined");
 				button_dest.setDisable(false);
+				folder_dest = "delete";
+				prop.setProperty("folder_dest", folder_dest);
+				save();
 			}
 		});
 
