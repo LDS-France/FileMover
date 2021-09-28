@@ -1,4 +1,4 @@
-package fr.barbierb.filemover;
+package fr.barbierb.lenze.filemover;
 
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
@@ -26,9 +26,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage s) throws Exception {
 		Main.stage = s;
-		addAppToTray();
+		
 
-		Parent root = null;
+		System.out.println(new File(".").getAbsolutePath());
+		new File(".").createNewFile();
+		
+		//addAppToTray();
+
+		/*Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/fxml/App.fxml"));
 		} catch (IOException e) {
@@ -44,7 +49,7 @@ public class Main extends Application {
 		s.setFullScreenExitHint("");
 		s.setResizable(false);
 		s.getIcons().add(new Image(getClass().getResourceAsStream("/img/icon_black.png")));
-		s.show();
+		s.show();*/
 	}
 
 	private void addAppToTray() {
@@ -63,7 +68,7 @@ public class Main extends Application {
 
 			trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
 
-			java.awt.MenuItem openItem = new java.awt.MenuItem("Propriétés");
+			java.awt.MenuItem openItem = new java.awt.MenuItem("Propriï¿½tï¿½s");
 			openItem.addActionListener(event -> Platform.runLater(this::showStage));
 
 			java.awt.Font defaultFont = java.awt.Font.decode(null);

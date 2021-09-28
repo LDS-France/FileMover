@@ -1,4 +1,4 @@
-package fr.barbierb.filemover;
+package fr.barbierb.lenze.filemover;
 
 import java.io.File;
 import java.io.FileReader;
