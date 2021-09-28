@@ -39,7 +39,7 @@ public class AppController {
 
 	@FXML
 	void initialize() {
-		
+		// test
 		prop = new Properties();
 		try {
 			FileReader reader = new FileReader("app.properties");
