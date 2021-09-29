@@ -14,3 +14,6 @@
 --win-upgrade-uuid ${windows.upgrade.uuid}
 --description "${project.description}"
 --copyright "(C) ${windows.vendor}"
+--win-shortcut
+--win-per-user-install
+--win-dir-chooser

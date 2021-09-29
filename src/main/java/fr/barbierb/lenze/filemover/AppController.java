@@ -178,7 +178,7 @@ public class AppController {
 			save();
 		});
 
-		button_src.setText(folder_src==null?"Dossier source non d�fini":folder_src);
+		button_src.setText(folder_src==null?"Dossier source non défini":folder_src);
 		button_src.setOnMousePressed(e -> {
 			DirectoryChooser chooser = new DirectoryChooser();
 			chooser.setTitle("Select the destination folder.");

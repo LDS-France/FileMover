@@ -27,29 +27,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage s) throws Exception {
 		Main.stage = s;
-		
 
-		System.out.println(new File(".").getAbsolutePath());
-		new File(".").createNewFile();
-		
 		addAppToTray();
-
-		Platform.setImplicitExit(false);
-
-		s.setTitle("FileMover - Lenze Ruitz");
-		s.setScene(new Scene(new Button("test")));
-		s.setMinWidth(400);
-		s.setMinHeight(250);
-		s.setFullScreenExitHint("");
-		s.setResizable(false);
-		s.show();
-
-		/*while(true) {
-			System.out.println("test");
-			Thread.currentThread().sleep(1000);
-		}*/
 		
-		/*Parent root = null;
+		Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/fxml/App.fxml"));
 		} catch (IOException e) {
@@ -65,7 +46,7 @@ public class Main extends Application {
 		s.setFullScreenExitHint("");
 		s.setResizable(false);
 		s.getIcons().add(new Image(getClass().getResourceAsStream("/img/icon_black.png")));
-		s.show();*/
+		s.show();
 	}
 
 	private void addAppToTray() {
@@ -84,7 +65,7 @@ public class Main extends Application {
 
 			trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
 
-			java.awt.MenuItem openItem = new java.awt.MenuItem("Propri�t�s");
+			java.awt.MenuItem openItem = new java.awt.MenuItem("Propriétés");
 			openItem.addActionListener(event -> Platform.runLater(this::showStage));
 
 			java.awt.Font defaultFont = java.awt.Font.decode(null);

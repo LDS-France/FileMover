@@ -6,7 +6,7 @@
   <groupId>fr.barbierb.lenze</groupId>
   <artifactId>filemover</artifactId>
   <version>0.1</version>
-  <description>Sample JavaFX Application</description>
+  <description>Modificateur de fichiers interne a LDS-France.</description>
   
       <properties>
         <!-- Set this to the class with the main method for your application -->
@@ -39,9 +39,9 @@
         <!-- Replace this UUID with a custom one for your project. This ID is used by the Windows installer system
         to know that an installer is intended to replace/upgrade an earlier version. The easiest thing to do is
         grab a unique UUID via https://www.uuidgenerator.net -->
-        <windows.upgrade.uuid>aaaaaaaa-0000-aaaa-aaaa-aaaaaaaaaaaa</windows.upgrade.uuid>
+        <windows.upgrade.uuid>00000000-0000-0000-0000-000000000001</windows.upgrade.uuid>
         <!-- This is used to set many user-visible fields in the Windows Installer. See win-jpackage.txt -->
-        <windows.vendor>Sample</windows.vendor>
+        <windows.vendor>LDS-France</windows.vendor>
     </properties>
   
   
@@ -106,14 +106,6 @@
   
   
   <plugins>
-  			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>fr.barbierb.lenze.filemover.Main</mainClass>
-                </configuration>
-            </plugin>
   
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
