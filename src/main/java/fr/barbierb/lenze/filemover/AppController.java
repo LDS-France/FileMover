@@ -117,7 +117,7 @@ public class AppController {
 							
 							///if(fileMovedAmount>0) {
 								//String s = ((fileMovedAmount>1)?"s":"");
-								//String notifMessage = fileMovedAmount+" fichier"+s+" déplacé"+s+".";
+								//String notifMessage = fileMovedAmount+" fichier"+s+" dÃ©placÃ©"+s+".";
 								//SwingUtilities.invokeLater(() -> Main.trayIcon.displayMessage("FileMover", notifMessage, java.awt.TrayIcon.MessageType.INFO));
 							//}
 
@@ -178,7 +178,7 @@ public class AppController {
 			save();
 		});
 
-		button_src.setText(folder_src==null?"Dossier source non défini":folder_src);
+		button_src.setText(folder_src==null?"Dossier source non dï¿½fini":folder_src);
 		button_src.setOnMousePressed(e -> {
 			DirectoryChooser chooser = new DirectoryChooser();
 			chooser.setTitle("Select the destination folder.");
@@ -193,7 +193,7 @@ public class AppController {
 			}
 		});
 
-		button_dest.setText(folder_dest==null?"Dossier destination non défini":folder_dest);
+		button_dest.setText(folder_dest==null?"Dossier destination non dÃ©fini":folder_dest);
 		button_dest.setOnMousePressed(e -> {
 			DirectoryChooser chooser = new DirectoryChooser();
 			chooser.setTitle("Select the destination folder.");
