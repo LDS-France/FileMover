@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
   <groupId>fr.barbierb.lenze</groupId>
   <artifactId>filemover</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <description>Sample JavaFX Application</description>
   
       <properties>
         <!-- Set this to the class with the main method for your application -->
-        <main-class>fr.barbierb.lenze.filemover</main-class>
+        <main-class>fr.barbierb.lenze.filemover.Main</main-class>
         <!-- Change your app's name to something interesting... but you might want to avoid spaces
         just to safe for compatibility across operating systems. -->
         <app.name>FileMover</app.name>

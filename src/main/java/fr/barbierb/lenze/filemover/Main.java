@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -31,8 +32,23 @@ public class Main extends Application {
 		System.out.println(new File(".").getAbsolutePath());
 		new File(".").createNewFile();
 		
-		//addAppToTray();
+		addAppToTray();
 
+		Platform.setImplicitExit(false);
+
+		s.setTitle("FileMover - Lenze Ruitz");
+		s.setScene(new Scene(new Button("test")));
+		s.setMinWidth(400);
+		s.setMinHeight(250);
+		s.setFullScreenExitHint("");
+		s.setResizable(false);
+		s.show();
+
+		/*while(true) {
+			System.out.println("test");
+			Thread.currentThread().sleep(1000);
+		}*/
+		
 		/*Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/fxml/App.fxml"));
@@ -106,7 +122,8 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		File file = new File("filemover.lock");
+		System.out.println("LAUNCH");
+		/*File file = new File("filemover.lock");
 		try {
 		    FileChannel fc = FileChannel.open(file.toPath(),
 		            StandardOpenOption.CREATE,
@@ -119,7 +136,7 @@ public class Main extends Application {
 		    }
 		} catch (IOException e) {
 		    throw new Error(e);
-		}
+		}*/
 		
 		Application.launch(args);
 	}
