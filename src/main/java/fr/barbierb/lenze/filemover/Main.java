@@ -112,7 +112,7 @@ public class Main extends Application {
 		    FileLock lock = fc.tryLock();
 		    
 		    if (lock == null) {
-		        System.out.println("Vous ne pouvez pas lancer plusieurs instances");
+		        System.out.println("Vous ne pouvez pas lancer plusieurs instances.");
 		        System.exit(0);
 		    }
 		} catch (IOException e) {
