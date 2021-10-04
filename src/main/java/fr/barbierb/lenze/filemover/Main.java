@@ -104,7 +104,7 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		System.out.println("LAUNCH");
-		/*File file = new File("filemover.lock");
+		File file = new File("filemover.lock");
 		try {
 		    FileChannel fc = FileChannel.open(file.toPath(),
 		            StandardOpenOption.CREATE,
@@ -117,7 +117,7 @@ public class Main extends Application {
 		    }
 		} catch (IOException e) {
 		    throw new Error(e);
-		}*/
+		}
 		
 		Application.launch(args);
 	}
