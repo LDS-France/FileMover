@@ -124,15 +124,15 @@ public class AppController {
 						}
 					}
 					
-					long timeToSleep = 1000; // 0
-					/*if(comboboxIndex == 0)
+					long timeToSleep = 0;
+					if(comboboxIndex == 0)
 						timeToSleep = 1000 * 60 * 30; // 30 mins
 					else if(comboboxIndex == 1)
 						timeToSleep = 1000 * 60 * 60; // 1 h
 					else if(comboboxIndex == 2)
 						timeToSleep = 1000 * 60 * 120; // 2 h
 					else if(comboboxIndex == 3)
-						timeToSleep = 1000 * 60 * 240; // 4 h*/
+						timeToSleep = 1000 * 60 * 240; // 4 h
 						
 					
 					try {
