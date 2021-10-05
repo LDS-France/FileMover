@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
   <groupId>fr.barbierb.lenze</groupId>
   <artifactId>filemover</artifactId>
-  <version>0.1</version>
+  <version>0.0.1</version>
   <description>Modificateur de fichiers interne a LDS-France.</description>
   
       <properties>
@@ -19,8 +19,8 @@
          https://docs.microsoft.com/en-us/windows/win32/msi/productversion
          https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/text/SimpleDateFormat.html
          -->
-        <maven.build.timestamp.format>ddMMyyyy</maven.build.timestamp.format>
-        <app.version>0.1.${maven.build.timestamp}</app.version>
+        <maven.build.timestamp.format>yy.ww.WWkkmm</maven.build.timestamp.format>
+        <app.version>${maven.build.timestamp}</app.version>
 
         <!-- This property is used to specify the modules included in the (custom) JVM image. -->
         <!-- Reminder: javafx.web (the embedded browser component) is not included in this project by default due
