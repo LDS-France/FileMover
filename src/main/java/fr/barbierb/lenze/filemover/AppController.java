@@ -64,7 +64,12 @@ public class AppController {
 			@Override
 			public void run() {
 				while(true) {
+					System.out.println("while");
 					if(folder_src != null && folder_dest != null && fileExt != null) {
+
+						System.out.println(folder_src);
+						System.out.println(folder_dest);
+						System.out.println(fileExt);
 						
 						File src = new File(folder_src);
 						File dest = new File(folder_dest);
@@ -86,7 +91,10 @@ public class AppController {
 								try {
 									
 									if(checkbox_delete.isSelected()) {
-										
+										System.out.println(file.getName());
+										System.out.println(System.currentTimeMillis()-file.lastModified());
+										System.out.println((System.currentTimeMillis()-file.lastModified())/1000);
+										System.out.println(fileLifetime);
 										if(usingLifetime && (System.currentTimeMillis()-file.lastModified())/1000 <= fileLifetime)
 											continue;
 										
